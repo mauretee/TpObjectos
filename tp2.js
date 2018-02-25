@@ -1,6 +1,12 @@
 /////////////////TIPOS
 const Bool = {
 	toString: function(){return "Bool"}
+	deepCopy: function(){
+		return {
+			toString: new Bool.toString(),
+			deepCopy: new Bool.deepCopy()
+		};
+	}
 }; // cte. de tipo
 
 //yo quiero hacer cosas de la pinta:
@@ -13,7 +19,11 @@ const func_bb = {l: Bool,
 	r: Bool,
 	toString: function(){
 		return l.toString(), " -> ", r.toString();
-	}};
+	}
+	deepCopy: function() {
+		return {l: l.deepCopy(), r: r.deepCopy()};
+	}
+};
 //con ésto ^ todas las otras funciones tienen que ser prototipadas por func_bb
 
 const func = function(lt, rt){
@@ -76,8 +86,16 @@ function abs(vr, tp, M){
 		return {v: this.v.deepCopy() , t: this.t.deepCopy(), m: this.m.deepCopy()}
 	}
 
+	this.sust = function (s, m){
+		
+	}
+
 }
 
 //ejercicio 2: es el toString de ahí arriba
 
-//ejercicio 3:
+//ejercicio 3: CREO que sería así, especialmente con Bool que no tengo ni la más puta idea, pls miralo
+
+//ejercicio 4: serían los this.sust
+//no sé cómo implementarlo; preguntar el lunes
+
