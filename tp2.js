@@ -33,9 +33,15 @@ const func = function(lt, rt){
 
 const TT = {
 	toString: function(){return "ture"}
+/*	deepCopy: function(){return {
+		{toString: function() {return "fasle"}}
+	}}*/
 };
 const FF = {
 	toString: function(){return "fasle"}
+/*	deepCopy: function(){return {
+		{toString: function() {return "fasle"}}
+	}}*/
 };
 
 function app(M, N){
@@ -44,6 +50,12 @@ function app(M, N){
 	this.n = N;
 	this.toString = function () {
 		return this.m.toString(), " ", this.n.toString();
+	}
+	this.deepCopy = function () {
+		return {
+			this.m.deepCopy();
+			this.n.deepCopy();
+		}
 	}
 } //???
 
@@ -59,7 +71,13 @@ function abs(vr, tp, M){
 		//v en realidad es una string cualquiera
 		return "(\\", this.v.toString(), ": ", this.t.toString(), ". (", this.m.toString()"))"
 	};
+	
+	this.deepCopy = function () {
+		return {v: this.v.deepCopy() , t: this.t.deepCopy(), m: this.m.deepCopy()}
+	}
+
 }
 
 //ejercicio 2: es el toString de ahí arriba
 
+//ejercicio 3:
