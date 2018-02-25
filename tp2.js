@@ -24,7 +24,7 @@ const func = function(lt, rt){
 
 function app(M, N){
 	//le paso un objeto M y otro objeto N y genero una expresión tipo {M, N}
-	return {M, N};
+	return {m: M, n: N};
 } //???
 
 function abs(vr, tp, M){
