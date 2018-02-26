@@ -1,73 +1,58 @@
 /////////////////TIPOS
-const Bool = {
-	toString: function(){return "Bool"}
-	deepCopy: function(){
-		return {
-			toString: new Bool.toString(),
-			deepCopy: new Bool.deepCopy()
-		};
-	}
-}; // cte. de tipo
+const Bool = function () {};
+
+Bool.prototype.toString = function () {return "Bool"};
 
 //yo quiero hacer cosas de la pinta:
 // let a = Object.create(Bool);
 
 //funciones
 
-//tipo flechita
-const func_bb = {l: Bool,
-	r: Bool,
-	toString: function(){
-		return l.toString(), " -> ", r.toString();
-	}
-	deepCopy: function() {
-		return {l: l.deepCopy(), r: r.deepCopy()};
-	}
-};
-//con ésto ^ todas las otras funciones tienen que ser prototipadas por func_bb
-
-const func = function(lt, rt){
-	//constructor
-	//tiene a func_bb como prototipo
-	this = Object.create(func_bb);
+const flec = function(lt, rt){
 	this.l = lt;
 	this.r = rt;
-	//ésto es el tipo flechita
-	//toString es lo mismo, el prototipo creo que debería andar
+}
 
-};	//ésta función creo que vamos a querer sacarla?
-//con ésto podés hacer: let a = new func(tipo1, tipo2)
-//quiero decir cosas como "func(lt, rt)"??
+flec.prototype.toString = function () {return (this.l.toString() + " -> " + this.r.toString());}
 
+/*
 ///////////////VALORES
+*/
+const TT = function(){};
 
-const TT = {
-	toString: function(){return "ture"}
-/*	deepCopy: function(){return {
-		{toString: function() {return "fasle"}}
-	}}*/
-};
-const FF = {
-	toString: function(){return "fasle"}
-/*	deepCopy: function(){return {
-		{toString: function() {return "fasle"}}
-	}}*/
-};
+const FF = function() {};
+
+TT.prototype.toString = function () {
+	return "true";
+}
+
+
+FF.prototype.toString = function () {
+	return "false";
+}
 
 function app(M, N){
 	//le paso un objeto M y otro objeto N y genero una expresión tipo {M, N}
 	this.m = M;
 	this.n = N;
-	this.toString = function () {
-		return this.m.toString(), " ", this.n.toString();
-	}
-	this.deepCopy = function () {
-		return {
-			this.m.deepCopy();
-			this.n.deepCopy();
-		}
-	}
 } //???
+
+app.prototype.toString = function () {
+		return this.m.toString() + " " + this.n.toString();
+}
+
+app.prototype.deepCopy = function () {
+	return {
+		m: this.m.deepCopy(),
+		n: this.n.deepCopy()
+	}
+}
+
+function vars(h){
+	this.v = h;
+}
+
+vars.prototype.toString = function () {return this.v};
 
 function abs(vr, tp, M){
 	//v sería el string que representa a la variable
@@ -76,21 +61,18 @@ function abs(vr, tp, M){
 	this.v = vr;
 	this.t = tp;
 	this.m = M;
-	//ej2:
-	this.toString = function () {
-		//v en realidad es una string cualquiera
-		return "(\\", this.v.toString(), ": ", this.t.toString(), ". (", this.m.toString()"))"
-	};
-	
-	this.deepCopy = function () {
-		return {v: this.v.deepCopy() , t: this.t.deepCopy(), m: this.m.deepCopy()}
-	}
-
-	this.sust = function (s, m){
-		
-	}
-
 }
+
+abs.prototype.toString = function () {
+		//v en realidad es una string cualquiera
+		return "(\\" + this.v.toString() + ": " + this.t.toString() + ". (" + this.m.toString() + "))"
+};
+
+
+abs.prototype.deepCopy = function () {
+	 	return {v: this.v.deepCopy() , t: this.t.deepCopy(), m: this.m.deepCopy()}
+}
+
 
 //ejercicio 2: es el toString de ahí arriba
 
