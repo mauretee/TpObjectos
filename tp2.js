@@ -86,6 +86,9 @@ abs.prototype.deepCopy = function () {
 
 abs.prototype.sust(str, m){}
 
-app.prototype.sust(str, m){}
+app.prototype.sust(str, m){
+    this.m = this.m.sust(str, m);
+    this.n = this.n.sust(str, n);
+}
 
 vars.prototype.sust(str, m){}
