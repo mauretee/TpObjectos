@@ -15,6 +15,8 @@ const flec = function(lt, rt){
 
 flec.prototype.toString = function () {return (this.l.toString() + " -> " + this.r.toString());}
 
+flec.prototype.deepCopy = function () {return {l: this.l.deepCopy(), r: this.r.deepCopy()}};
+
 /*
 ///////////////VALORES
 */
@@ -54,6 +56,8 @@ function vars(h){
 
 vars.prototype.toString = function () {return this.v};
 
+vars.prototype.deepCopy = function () {return (new String(this.v))};
+
 function abs(vr, tp, M){
 	//v sería el string que representa a la variable
 	//t el tipo, hay que ver que sea o bien Bool o bien algo de prototipo func_bb
@@ -79,5 +83,9 @@ abs.prototype.deepCopy = function () {
 //ejercicio 3: CREO que sería así, especialmente con Bool que no tengo ni la más puta idea, pls miralo
 
 //ejercicio 4: serían los this.sust
-//no sé cómo implementarlo; preguntar el lunes
 
+abs.prototype.sust(str, m){}
+
+app.prototype.sust(str, m){}
+
+vars.prototype.sust(str, m){}
